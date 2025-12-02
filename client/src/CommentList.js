@@ -6,7 +6,9 @@ const CommentList = ({ postId }) => {
   const [comments, setComments] = useState([]);
 
   const fetchComment = async () => {
-    const { data } = await axios.get(`${DOMAIN_COMMENT}/posts/${postId}/comments`);
+    const { data } = await axios.get(
+      `${DOMAIN_COMMENT}/posts/${postId}/comments`
+    );
     setComments(data);
   };
 
