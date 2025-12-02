@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { DOMAIN_POST } from './constants';
 
 const PostCreate = () => {
   const [title, setTitle] = useState('');
 
   const submit = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:4000/posts', {
+    await axios.post(`${DOMAIN_POST}/posts`, {
       title,
     })
     setTitle('');
