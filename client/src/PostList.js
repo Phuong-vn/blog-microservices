@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { DOMAIN_QUERY } from './constants';
 import axios from 'axios';
 import CommentCreate from './CommentCreate';
-import CommentList from './CommentList';
 
 const PostList = () => {
   const [posts, setPosts] = useState({});
@@ -29,7 +28,8 @@ const PostList = () => {
               <h3 className='card-title'>{post.title}</h3>
               <ul>
                 {post.comments.map((comment) => {
-                  return <li key={comment.id}>{comment.content}</li>;
+                  const content= comment.status === 'approved' ? comment.content : comment.status === 'rejected' ? 'Rejected' : 'Waiting for moderation approval'
+                  return <li key={comment.id}>{content}</li>;
                 })}
               </ul>
               <CommentCreate postId={post.id} />

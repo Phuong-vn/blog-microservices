@@ -5,13 +5,21 @@ const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.json());
 
+const events = [];
+
 app.post('/events', async (req, res) => {
-  await axios.post('http://localhost:4000/events', { event: req.body });
-  await axios.post('http://localhost:4001/events', { event: req.body });
-  await axios.post('http://localhost:4002/events', { event: req.body });
-  await axios.post('http://localhost:4003/events', { event: req.body });
+  const event = req.body;
+  events.push(event);
+  await axios.post('http://localhost:4000/events', { event });
+  await axios.post('http://localhost:4001/events', { event });
+  await axios.post('http://localhost:4002/events', { event });
+  await axios.post('http://localhost:4003/events', { event });
   console.log('Received event:', req.body.type);
   res.status(200).send('OK');
+});
+
+app.get('/events', (_req, res) => {
+  res.status(200).send(events);
 });
 
 app.listen(4005, () => {
