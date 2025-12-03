@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { DOMAIN_POST } from './constants';
+import { DOMAIN_QUERY } from './constants';
 import axios from 'axios';
 import CommentCreate from './CommentCreate';
 import CommentList from './CommentList';
@@ -8,7 +8,7 @@ const PostList = () => {
   const [posts, setPosts] = useState({});
 
   const fetchPost = async () => {
-    const { data } = await axios.get(`${DOMAIN_POST}/posts`);
+    const { data } = await axios.get(`${DOMAIN_QUERY}/query`);
     setPosts(data);
   };
 
@@ -27,7 +27,11 @@ const PostList = () => {
           >
             <div className='card-body'>
               <h3 className='card-title'>{post.title}</h3>
-              <CommentList postId={post.id} />
+              <ul>
+                {post.comments.map((comment) => {
+                  return <li key={comment.id}>{comment.content}</li>;
+                })}
+              </ul>
               <CommentCreate postId={post.id} />
             </div>
           </li>

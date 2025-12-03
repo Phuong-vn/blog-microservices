@@ -28,8 +28,9 @@ app.post('/posts', async (req, res) => {
   res.status(201).send(posts[id]);
 });
 
-app.post('/events', (_req, res) => {
-  res.status(200).send('OK');
+app.post('/events', (req, res) => {
+  console.log('Received event:', req.body.event.type);
+  res.send({});
 });
 
 app.listen(4000, () => {
