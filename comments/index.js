@@ -29,7 +29,7 @@ app.post('/posts/:id/comments', async (req, res) => {
     commentsByPostId[postId] = [newComment];
   }
 
-  await axios.post('http://localhost:4005/events', {
+  await axios.post('http://event-bus-srv:4005/events', {
     type: 'CommentCreated',
     data: { ...newComment, postId },
   })
@@ -45,7 +45,7 @@ app.post('/events', async (req, res) => {
       const currentComment = commentsByPostId[postId].find((comment) => comment.id === id);
       if (currentComment) {
         currentComment.status = status;
-        await axios.post('http://localhost:4005/events', {
+        await axios.post('http://event-bus-srv:4005/events', {
           type: 'CommentUpdated',
           data: { ...currentComment, postId },
         });
