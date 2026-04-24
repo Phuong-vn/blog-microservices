@@ -1,4 +1,6 @@
-FROM node:14-alpine
+FROM node:24.15-alpine3.22
+ENV CI=true
+ENV WDS_SOCKET_PORT=0
 WORKDIR /src/app/
 COPY package.json ./
 RUN npm install
