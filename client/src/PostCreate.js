@@ -7,7 +7,7 @@ const PostCreate = () => {
 
   const submit = async (e) => {
     e.preventDefault();
-    await axios.post(`${DOMAIN_POST}/posts`, {
+    await axios.post(`${DOMAIN_POST}/posts/create`, {
       title,
     })
     setTitle('');
